@@ -8,7 +8,7 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false
 import axios from "axios";
 
-axios.defaults.baseURL = 'http://192.168.0.102:8090/'
+axios.defaults.baseURL = 'http://abocidee.com:8090/'
 Vue.prototype.$http = axios
 router.beforeEach((to, from, next) => {
 

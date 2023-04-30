@@ -1,11 +1,11 @@
 <template>
   <div class="login">
 
-    <van-form @submit="handleLogin">
+    <van-form @submit="handleLogin" >
       <h2 class="title">和信后台管理系统-员工端</h2>
       <van-cell-group inset>
         <van-field
-            v-model="loginForm.username"
+            v-model="loginForm.name"
             name="用户名"
             label="用户名"
             placeholder="用户名"
@@ -23,6 +23,10 @@
       <div style="margin: 16px;">
         <van-button round block   type="primary" native-type="submit">
           登录
+        </van-button>
+        <br> <br>
+        <van-button round block   type="primary" to="register" native-type="submit">
+          前往注册
         </van-button>
       </div>
     </van-form>
@@ -42,7 +46,7 @@ export default {
   data(){
     return{
       loginForm:{
-        username:'',
+        name:'',
         password:'',
         // rememberMe:false
       },

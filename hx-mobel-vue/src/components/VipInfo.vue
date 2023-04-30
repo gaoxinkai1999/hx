@@ -9,7 +9,7 @@
       @click-right="delVip"
   />
   <van-cell-group >
-    <van-cell center title="姓名" :value="vip.vipname"  size="large" />
+    <van-cell center title="姓名" :value="vip.name"  size="large" />
     <van-cell center title="年龄" :value="vip.age"  size="large" />
     <van-cell center title="积分" :value="vip.积分"  size="large" />
     <van-cell center title="手机号" :value="vip.phone"  size="large" />

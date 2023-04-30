@@ -1,9 +1,11 @@
 package com.example.hx_api;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.hx_api.Api.*;
+import com.example.hx_api.Controller.Controller;
+import com.example.hx_api.Dao.DeptDao;
 import com.example.hx_api.Dao.UserDao;
-import com.example.hx_api.PoJo.User;
-import com.example.hx_api.PoJo.Vip;
+import com.example.hx_api.Service.UpDate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,7 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 @SpringBootTest
@@ -23,21 +24,31 @@ class ShoubaApplicationTests {
     @Autowired
     销售信息请求参数 b;
 
-@Autowired
+    @Autowired
     UserDao userDao;
+    @Autowired
+    DeptDao deptDao;
+    @Autowired
+    UpDate upDate;
+    @Autowired
+    Controller controller;
+
+
 
     @Test
     void contextLoads() throws IOException, ParseException {
 
+//        JSONObject demo1 = api.demo(new 会员详情参数(51747));
+//        System.out.println(demo1);
 
-        ArrayList<User> users = userDao.getUsers();
-        for (User user : users) {
-            System.out.println(user);
-        }
-        ArrayList<Vip> vipByUserID = userDao.getVipByUserID(1);
-        for (Vip vip : vipByUserID) {
-            System.out.println(vip);
-        }
+//        ArrayList<User> users = userDao.getUsers();
+//        for (User user : users) {
+//            System.out.println(user);
+//        }
+//        ArrayList<Vip> vipByUserID = userDao.getVipByUserID(1);
+//        for (Vip vip : vipByUserID) {
+//            System.out.println(vip);
+//        }
 
 
 //        for (int i = 1; i < 179; i++) {
@@ -111,7 +122,8 @@ class ShoubaApplicationTests {
         }
         return date.after(start_date);
     }
-    public void demo(){
+
+    public void demo() {
         a.setProcArray(1);
         响应 result = api.用户列表(a);
         System.out.println(result);

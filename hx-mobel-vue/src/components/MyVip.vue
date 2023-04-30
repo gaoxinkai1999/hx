@@ -16,8 +16,8 @@
 <!--  >-->
 <!--    <van-cell v-for="item in list" :key="item" :title="item" size="large" />-->
 <!--  </van-list>-->
-  <van-cell-group >
-    <van-cell v-for="item in list" :key="item.id" :title="item.vipname" size="large" is-link @click="toVipInfo(item)" />
+  <van-cell-group  style ="white-space: pre-line;">
+    <van-cell v-for="item in list" :key="item.id" :title="item.name" :label="'积分:'+item.积分+'\n'+item.未消费天数+'天未消费'" size="large" is-link @click="toVipInfo(item)" />
   </van-cell-group>
 
 </div>
@@ -36,11 +36,12 @@ export default {
     };
   },
   created() {
-      this.getVips()
+
+      this.getVips(this.$route.query.start,this.$route.query.end)
   },
   methods: {
-     getVips(){
-       this.$http.post('getVipByUserID',{id:localStorage.getItem("UserId")}).then(res=>{
+     getVips(start,end){
+       this.$http.post('getVipByUserID',{id:localStorage.getItem("UserId"),start:start,end:end}).then(res=>{
         this.list=res.data
       })
     },

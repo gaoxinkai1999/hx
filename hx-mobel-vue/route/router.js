@@ -5,6 +5,7 @@ import Login from "@/components/Login.vue";
 import MyVip from "@/components/MyVip.vue";
 import AddVip from "@/components/AddVip.vue";
 import VipInfo from "@/components/VipInfo.vue";
+import Register from "@/components/Register.vue";
 //第三方库需要use一下才能用
 Vue.use(VueRouter)
 //引入组件
@@ -18,6 +19,14 @@ const routes=[
         // 登录
         path: '/login',
         component: Login,
+        meta: {
+            isLogin: false
+        }
+    },
+    {
+        // 注册
+        path: '/register',
+        component: Register,
         meta: {
             isLogin: false
         }
