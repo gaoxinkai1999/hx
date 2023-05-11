@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import {Dialog} from "vant";
+import {Dialog, Toast} from "vant";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -78,7 +78,12 @@ export default {
           .then(() => {
             // on confirm
             this.$http.post('addUser',this.data).then(res=>{
-              console.log(res.data)
+              if (res.data==true){
+                Toast.success('注册成功,请返回登录页面');
+
+              }else {
+                Toast.fail('该用户名已使用');
+              }
 
             })
           })

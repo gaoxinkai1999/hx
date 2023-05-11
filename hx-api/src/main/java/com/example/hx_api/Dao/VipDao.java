@@ -1,6 +1,7 @@
 package com.example.hx_api.Dao;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.hx_api.PoJo.Vip;
 import org.apache.ibatis.annotations.*;
 
@@ -8,30 +9,33 @@ import java.util.ArrayList;
 
 @Mapper
 public interface VipDao {
+    /**
+     * 添加vip
+     * @param vip
+     */
 
-    @Insert("insert into vip values (null,#{hyid},#{name},#{age},#{积分},#{phone},#{未消费天数},#{adress},#{维护人.id})")
+    @Insert("insert into vip values (null,#{hyid},#{name},#{age},#{积分},#{phone},#{未消费天数},#{adress},#{维护人.id},curdate())")
     void addVip(Vip vip);
-
-    @Select("select * from vip where phone=#{phone}")
-    ArrayList<Vip> getVipByPhone(String phone);
-
 
     @Select("select * from vip where id=#{id}")
     @Results({
             @Result(column = "维护人id", property = "维护人",
-                    one = @One(select = "com.example.hx_api.Dao.UserDao.getUsersByDeptId")),
+                    one = @One(select = "com.example.hx_api.Dao.UserDao.getUserById")),
     })
     Vip getVipByID(int id);
 
+
+
     @Delete("delete from vip where id=#{id}")
-    void delVipByID(int id);
-
-
-   @Update("update vip set name=#{name} ,age=#{age},积分=#{积分},phone=#{phone},未消费天数=#{未消费天数},adress=#{adress} where id=#{id}")
+    void delVip(int id);
+    /**
+     * 更新vip数据  用于每天服务器定时更新 和pc端数据更新
+     * @param vip
+     */
+   @Update("update vip set name=#{name} ,age=#{age},积分=#{积分},phone=#{phone},未消费天数=#{未消费天数},adress=#{adress} where hyid=#{hyid}")
     void setVip(Vip vip);
 
-    @Select("select * from vip where 维护人id=#{id} and 未消费天数>=#{start} and 未消费天数<#{end} order by 未消费天数")
-    ArrayList<Vip> getVipByUserID(int id,int start,int end);
+
 
     /**
      * 用于检查会员是否重复
@@ -47,8 +51,74 @@ public interface VipDao {
 
 
     /**
-     * 获取全部会员数据，可能有重复，用于更新数据
+     * 获取全部会员数据，用于更新数据
      */
-    @Select("select * from vip")
+    @Select("select * from vip group by hyid")
     ArrayList<Vip> getVips();
+
+    /**
+     * 获取全部会员数据，用于欢聚一堂
+     */
+    @Select("select * from vip ")
+    @Results({
+            @Result(column = "维护人id", property = "维护人",
+                    one = @One(select = "com.example.hx_api.Dao.UserDao.getUserById"))
+    })
+    ArrayList<Vip> getAllVips();
+
+
+
+    /**
+     * 念念不忘vip数据 满足200个且 180天以内未消费
+     */
+    @Select("select * from vip where 未消费天数<=180 and 维护人id=#{UserId} order by 未消费天数 limit 0,200")
+    ArrayList<Vip> 念念不忘(int UserId);
+    /**
+     * 好久不见vip数据 除了念念不忘的其他vip数据
+     */
+    @Select("select * from vip where  维护人id=#{UserId} and id not in (select * from (select id from vip where 未消费天数<=180 and 维护人id=#{UserId} order by 未消费天数 limit 0,200) as t) order by 未消费天数")
+    ArrayList<Vip> 好久不见(int UserId);
+
+    /**
+     * 念念不忘vip数据数量
+     * @return
+     */
+        @Select("select count(*) from vip where 未消费天数<=180 and 维护人id=#{UserId} limit 0,200")
+    int 念念不忘数量(int UserId);
+
+    /**
+     * 好久不见vip数据数量
+     * @return
+     */
+    @Select("select count(*)-(select count(*) from vip where 未消费天数<=180 and 维护人id=#{UserId}  limit 0,200) from vip where  维护人id=#{UserId} ;")
+    int 好久不见数量(int UserId);
+
+    @Select("select count(*) from vip")
+    int 欢聚一堂数量();
+
+
+    @Select("select * from vip where 维护人id=#{UserId} order by 未消费天数")
+    ArrayList<Vip> getVipsByUserId(int UserId);
+
+    /**
+     * 检查同一用户是否重复添加某会员
+     */
+    @Select("select count(*) from vip where 维护人id=#{UserId} and hyid=#{hyid}")
+    int CheckVipRepeat(int UserId,int hyid);
+
+    /**
+     * 修改vip的维护人id
+     */
+    @Update("update vip set 维护人id=#{UserId},create_time=curdate() where id=#{id}")
+    void setVipUser(int UserId,int id);
+
+    @Select("select name from vip where name like #{name} group by name")
+    ArrayList<Vip> FindVipLikeName(String name);
+
+    @Select("select * from vip where name=#{name}")
+    @Results({
+            @Result(column = "维护人id", property = "维护人",
+                    one = @One(select = "com.example.hx_api.Dao.UserDao.getUserById"))
+    })
+    ArrayList<Vip> getVipsByName(String name);
 }

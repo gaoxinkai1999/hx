@@ -5,6 +5,7 @@ import com.example.hx_api.Api.*;
 import com.example.hx_api.Controller.Controller;
 import com.example.hx_api.Dao.DeptDao;
 import com.example.hx_api.Dao.UserDao;
+import com.example.hx_api.Dao.VipDao;
 import com.example.hx_api.Service.UpDate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,8 @@ class ShoubaApplicationTests {
     UpDate upDate;
     @Autowired
     Controller controller;
+    @Autowired
+    VipDao vipDao;
 
 
 
@@ -40,7 +43,8 @@ class ShoubaApplicationTests {
 
 //        JSONObject demo1 = api.demo(new 会员详情参数(51747));
 //        System.out.println(demo1);
-
+        System.out.println(vipDao.念念不忘数量(1));
+        System.out.println(vipDao.好久不见数量(1));
 //        ArrayList<User> users = userDao.getUsers();
 //        for (User user : users) {
 //            System.out.println(user);

@@ -33,4 +33,12 @@ public interface UserDao {
     })
     User getUserById(int id);
 
+    /**
+     * 更改员工账户信息
+     */
+    @Update("update user set name=#{name},password=#{password} where id=#{id}")
+    void setUser(User user);
+
+
+
 }

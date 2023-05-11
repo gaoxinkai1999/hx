@@ -1,5 +1,6 @@
 package com.example.hx_api.Dao;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.hx_api.PoJo.Dept;
 import org.apache.ibatis.annotations.*;
 
@@ -26,4 +27,9 @@ public interface DeptDao {
 
    @Select("select * from dept where id=#{id}")
    Dept getDeptById(int id);
+
+
+
+   @Select("select name,(select count(*) from vip where 未消费天数<=180 and 维护人id=user.id limit 0,200) as 念念不忘 ,(select count(*)-(select count(*) from vip where 未消费天数<=180 and 维护人id=user.id  limit 0,200) from vip where  维护人id=user.id) as 好久不见 from user where 所属部门id=#{id}")
+   ArrayList<JSONObject> getDeptCountById(int id);
 }

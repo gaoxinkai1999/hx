@@ -3,10 +3,9 @@
   <van-nav-bar
       title="会员详情"
       left-text="返回"
-      right-text="删除"
       left-arrow
       @click-left="onClickLeft"
-      @click-right="delVip"
+
   />
   <van-cell-group >
     <van-cell center title="姓名" :value="vip.name"  size="large" />
@@ -20,7 +19,7 @@
 </template>
 
 <script>
-import {Dialog} from "vant";
+
 
 export default {
   name: "VipInfo",
@@ -33,21 +32,6 @@ export default {
     onClickLeft() {
       this.$router.back()
     },
-    delVip(){
-      Dialog.confirm({
-        title: '确认删除',
-      })
-          .then(() => {
-            // on confirm
-            this.$http.post('delVipById',{id:this.vip.id}).then(res=>{
-              console.log(res.data)
-            })
-          })
-          .catch(() => {
-            // on cancel
-          });
-
-    }
   },
   created() {
     this.$http.post('getVipById',{id:this.$route.query.id}).then(res=>{

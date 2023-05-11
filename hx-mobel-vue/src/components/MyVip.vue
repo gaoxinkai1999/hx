@@ -1,12 +1,11 @@
 <template>
 <div>
   <van-nav-bar
-      title="我的会员"
+      :title="this.$route.query.type"
       left-text="返回"
-      right-text="添加会员"
+
       left-arrow
       @click-left="onClickLeft"
-      @click-right="onClickRight"
   />
 <!--  <van-list-->
 <!--      v-model="loading"-->
@@ -40,34 +39,27 @@ export default {
       this.getVips(this.$route.query.start,this.$route.query.end)
   },
   methods: {
-     getVips(start,end){
-       this.$http.post('getVipByUserID',{id:localStorage.getItem("UserId"),start:start,end:end}).then(res=>{
-        this.list=res.data
-      })
-    },
-    onLoad() {
-      // 异步更新数据
-      // setTimeout 仅做示例，真实场景中一般为 ajax 请求
-      setTimeout(() => {
-        for (let i = 0; i < 10; i++) {
-          this.list.push(this.list.length + 1);
-        }
+     getVips(){
+       if (this.$route.query.type=='念念不忘'){
+         this.$http.post('念念不忘',{UserId:localStorage.getItem("UserId")}).then(res=>{
+           this.list=res.data
+         })
+       }else if (this.$route.query.type=='好久不见'){
+         this.$http.post('好久不见',{UserId:localStorage.getItem("UserId")}).then(res=>{
+           this.list=res.data
+         })
 
-        // 加载状态结束
-        this.loading = false;
+       }else if (this.$route.query.type=='欢聚一堂'){
+         this.$http.post('getAllVips').then(res=>{
+           this.list=res.data
+         })
+       }
 
-        // 数据全部加载完成
-        if (this.list.length >= 40) {
-          this.finished = true;
-        }
-      }, 1000);
     },
     onClickLeft() {
       this.$router.back()
     },
-    onClickRight() {
-      this.$router.push('/addvip')
-    },
+
     toVipInfo(vip){
       this.$router.push({  //核心语句
         path:'/vipinfo',   //跳转的路径

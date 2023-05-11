@@ -21,15 +21,23 @@ public class UpDate {
     public void start(){
         ArrayList<Vip> allVips = vipDao.getVips();
         for (Vip vip : allVips) {
-            JSONObject demo = api.demo(new 会员详情参数(vip.id));
+            JSONObject demo = api.demo(new 会员详情参数(vip.hyid));
             JSONArray info = demo.getJSONObject("MESSAGE").getJSONArray("VIPINFO");
             for (Object o : info) {
+                //更新未消费天数
               if (( (JSONObject)o).getString("FIELD").equals("D_LASTBUY")){
                   int value = ((JSONObject) o).getIntValue("VALUE");
                   vip.未消费天数=value;
-                 vipDao.setVip(vip);
+
               }
+                //更新积分
+                if (( (JSONObject)o).getString("FIELD").equals("N_ALLVALUE")){
+                    int value = ((JSONObject) o).getIntValue("VALUE");
+                    vip.积分=value;
+                }
+
             }
+            vipDao.setVip(vip);
         }
     }
 }

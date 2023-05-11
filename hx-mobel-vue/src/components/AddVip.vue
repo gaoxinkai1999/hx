@@ -42,23 +42,13 @@
         />
       </van-popup>
       <van-field
-          readonly
-          clickable
-          name="picker"
-          :value="VipForm.积分"
+          v-model="VipForm.积分"
+          name="积分"
           label="积分"
-          placeholder="点击选择积分"
-          @click="积分.showPicker = true"
+          placeholder="积分"
           :rules=rules
+          disabled
       />
-      <van-popup v-model="积分.showPicker" position="bottom">
-        <van-picker
-            show-toolbar
-            :columns="积分.columns"
-            @confirm="jf_onConfirm"
-            @cancel="积分.showPicker = false"
-        />
-      </van-popup>
 
       <van-field
           v-model="VipForm.phone"
@@ -120,11 +110,7 @@ export default {
       phone:'',
       popup_title:'选择是哪一个会员',
       age: {
-        columns: ['60后', '70后', '80后', '90后'],
-        showPicker: false,
-      },
-      积分:{
-        columns: ['1000以下', '1000-3000', '3000-6000', '6000-10000','10000以上'],
+        columns: ['60后', '70后', '80后', '90后','00后','未知'],
         showPicker: false,
       },
       rules:[{ required: true, message: '不能为空' }],
@@ -144,9 +130,14 @@ export default {
           .then(() => {
             // on confirm
             this.$http.post('addVip',this.VipForm).then(res=>{
-              console.log(res.data)
-              this.form_show=false
-              Toast.success('添加成功');
+             if (res.data){
+               this.form_show=false
+               Toast.success('添加成功');
+             }else {
+               this.form_show=false
+               Toast.fail('该会员已被添加')
+             }
+
             })
           })
           .catch(() => {
@@ -157,10 +148,6 @@ export default {
     age_onConfirm(value) {
       this.VipForm.age = value;
       this.age.showPicker = false;
-    },
-    jf_onConfirm(value){
-      this.VipForm.积分 = value;
-      this.积分.showPicker = false;
     },
     onSearch(){
       this.$http.post('FindVips',{phone:this.phone}).then(res=>{
@@ -195,6 +182,9 @@ export default {
                 this.VipForm.未消费天数=resKey.VALUE
               }if (resKey.FIELD=='C_MOBILE'){
                 this.VipForm.phone=resKey.VALUE
+              }
+              if(resKey.FIELD=='N_ALLVALUE'){
+                this.VipForm.积分=resKey.VALUE
               }
             }
             this.show=false

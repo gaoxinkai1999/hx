@@ -17,7 +17,7 @@ public class ShoubaApplication {
         SpringApplication.run(ShoubaApplication.class, args);
     }
 
-    @Scheduled(cron = "30 05 14 * * ?")
+    @Scheduled(cron = "00 30 23 * * ?")
     public void start(){
         System.out.println("执行定时任务");
         upDate.start();

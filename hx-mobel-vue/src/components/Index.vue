@@ -1,11 +1,18 @@
 <template>
 <div>
+  <van-notice-bar
+      left-icon="volume-o"
+      text="  每天23:30 更新用户数据"
+  />
   <div v-if="active==0" >
-    <van-cell-group inset title="会员维护列表" >
-      <van-cell center title="念念不忘"  is-link @click="toMyVip(0,180)" label="未消费天数0-180天" size="large" />
-      <van-cell center title="好久未见"  is-link @click="toMyVip(180,360)"  label="未消费天数180-360天" size="large"/>
-      <van-cell center  title="反观自省"  is-link @click="toMyVip(360,100000)" label="未消费天数360天以上" size="large"/>
-      <van-cell center title="欢聚一堂"  is-link @click="toMyVip(0,100000)" label="全部会员" size="large" />
+    <van-nav-bar
+        title="会员维护列表"
+        right-text="添加会员"
+        @click-right="onClickRight"></van-nav-bar>
+    <van-cell-group inset>
+      <van-cell center title="念念不忘"  is-link @click="toMyVip('念念不忘')"  :value="念念不忘数量+'位'" size="large" />
+      <van-cell center title="好久不见"  is-link @click="toMyVip('好久不见')"   :value="好久不见数量+'位'" size="large"/>
+      <van-cell center title="欢聚一堂"  is-link to="AllVips" :value="欢聚一堂数量+'位'"  size="large" />
     </van-cell-group>
 
   </div>
@@ -33,19 +40,38 @@ export default {
   components: {Mine},
   data(){
     return{
-      active:0
+      active:0,
+      念念不忘数量:0,
+      好久不见数量:0,
+      欢聚一堂数量:0,
     }
   },
+  created() {
+    this.getNum()
+  },
   methods:{
-    toMyVip(start,end){
+    toMyVip(type){
       this.$router.push({
         path: '/myvip',
         query: {
-         start: start,
-          end:end
+         type:type
         }
       })
-    }
+    },
+    getNum(){
+      this.$http.post('念念不忘数量',{UserId:localStorage.getItem('UserId')}).then(res=>{
+        this.念念不忘数量=res.data
+      })
+      this.$http.post('好久不见数量',{UserId:localStorage.getItem('UserId')}).then(res=>{
+        this.好久不见数量=res.data
+      })
+      this.$http.post('欢聚一堂数量').then(res=>{
+        this.欢聚一堂数量=res.data
+      })
+    },
+    onClickRight() {
+      this.$router.push('/addvip')
+    },
   }
 
 }
