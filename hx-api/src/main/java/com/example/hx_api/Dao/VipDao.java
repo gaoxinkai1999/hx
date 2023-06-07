@@ -14,7 +14,7 @@ public interface VipDao {
      * @param vip
      */
 
-    @Insert("insert into vip values (null,#{hyid},#{name},#{age},#{积分},#{phone},#{未消费天数},#{adress},#{维护人.id},curdate())")
+    @Insert("insert into vip values (null,#{hyid},#{name},#{age},#{积分},#{phone},#{未消费天数},#{adress},#{维护人.id},curdate(),#{R},#{F},#{M})")
     void addVip(Vip vip);
 
     @Select("select * from vip where id=#{id}")
@@ -32,7 +32,7 @@ public interface VipDao {
      * 更新vip数据  用于每天服务器定时更新 和pc端数据更新
      * @param vip
      */
-   @Update("update vip set name=#{name} ,age=#{age},积分=#{积分},phone=#{phone},未消费天数=#{未消费天数},adress=#{adress} where hyid=#{hyid}")
+   @Update("update vip set name=#{name} ,age=#{age},积分=#{积分},phone=#{phone},未消费天数=#{未消费天数},adress=#{adress},R=#{R},F=#{F},M=#{M} where hyid=#{hyid}")
     void setVip(Vip vip);
 
 

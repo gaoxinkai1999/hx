@@ -3,6 +3,7 @@ package com.example.hx_api.Service;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.hx_api.Api.Api;
+import com.example.hx_api.Api.RFM参数;
 import com.example.hx_api.Api.会员详情参数;
 import com.example.hx_api.Dao.VipDao;
 import com.example.hx_api.PoJo.Vip;
@@ -37,6 +38,12 @@ public class UpDate {
                 }
 
             }
+            //获取RFM值
+            JSONObject demo1 = api.demo(new RFM参数(vip.hyid));
+            JSONObject message = demo1.getJSONArray("MESSAGE").getJSONObject(0);
+            vip.R=message.getIntValue("rvalue");
+            vip.F=message.getIntValue("fvalue");
+            vip.M=message.getIntValue("mvalue");
             vipDao.setVip(vip);
         }
     }

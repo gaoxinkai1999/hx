@@ -16,7 +16,7 @@
 <!--    <van-cell v-for="item in list" :key="item" :title="item" size="large" />-->
 <!--  </van-list>-->
   <van-cell-group  style ="white-space: pre-line;">
-    <van-cell v-for="item in list" :key="item.id" :title="item.name" :label="'积分:'+item.积分+'\n'+item.未消费天数+'天未消费'" size="large" is-link @click="toVipInfo(item)" />
+    <van-cell v-for="item in list" :key="item.id" :title="item.name" :label="'积分:'+item.积分+'\n'+item.未消费天数+'天未消费'+'\nRFM值 '+item.R+':'+item.F+':'+item.M" size="large" is-link @click="toVipInfo(item)" />
   </van-cell-group>
 
 </div>

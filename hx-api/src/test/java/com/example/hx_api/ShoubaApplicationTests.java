@@ -40,11 +40,14 @@ class ShoubaApplicationTests {
 
     @Test
     void contextLoads() throws IOException, ParseException {
+            upDate.start();
+//        JSONObject demo1 = api.demo(new RFM参数(51747));
+//        JSONObject message = demo1.getJSONArray("MESSAGE").getJSONObject(0);
+//        System.out.println(message.getIntValue("fvalue"));
 
-//        JSONObject demo1 = api.demo(new 会员详情参数(51747));
-//        System.out.println(demo1);
-        System.out.println(vipDao.念念不忘数量(1));
-        System.out.println(vipDao.好久不见数量(1));
+//        System.out.println(.getIntValue("fvalue"));
+//        System.out.println(vipDao.念念不忘数量(1));
+//        System.out.println(vipDao.好久不见数量(1));
 //        ArrayList<User> users = userDao.getUsers();
 //        for (User user : users) {
 //            System.out.println(user);

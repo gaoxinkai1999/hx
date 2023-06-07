@@ -2,6 +2,7 @@ package com.example.hx_api.Controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.hx_api.Api.Api;
+import com.example.hx_api.Api.RFM参数;
 import com.example.hx_api.Api.会员详情参数;
 import com.example.hx_api.Api.手机号码查找会员参数;
 import com.example.hx_api.Dao.DeptDao;
@@ -108,6 +109,10 @@ public class Controller {
     @PostMapping("/FindVipInfo")
     public JSONObject FindVipInfo(@RequestBody JSONObject json){
        return api.demo(new 会员详情参数(json.getIntValue("hyid")));
+    }
+    @PostMapping("/getRFM")
+    public JSONObject getRFM(@RequestBody JSONObject json){
+        return api.demo(new RFM参数(json.getIntValue("hyid")));
     }
 
     /**
@@ -233,5 +238,12 @@ public class Controller {
     @PostMapping("/delVip")
     public void delVip(@RequestBody JSONObject json){
         vipDao.delVip(json.getIntValue("id"));
+    }
+
+
+    @PostMapping("/MoveUser")
+
+    public void MoveUser(@RequestBody JSONObject json){
+        userDao.moveUser(json.getIntValue("DeptId"),json.getIntValue("UserId"));
     }
 }

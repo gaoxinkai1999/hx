@@ -39,6 +39,9 @@ public interface UserDao {
     @Update("update user set name=#{name},password=#{password} where id=#{id}")
     void setUser(User user);
 
-
-
+    /**
+     * 更改员工所在部门
+     */
+    @Update("update user set 所属部门id=#{DeptId} where id=#{UserId}")
+    void moveUser(int DeptId,int UserId);
 }

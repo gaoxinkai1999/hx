@@ -19,4 +19,7 @@ public class Vip {
     public User 维护人;
 
     public Date create_time;
+    public int R;
+    public int F;
+    public int M;
 }

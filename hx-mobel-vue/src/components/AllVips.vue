@@ -31,7 +31,7 @@
       <van-cell center title="好久不见数量"  :value="好久不见数量"  />
     </van-cell-group>
     <van-cell-group title="会员列表" style ="white-space: pre-line;">
-      <van-cell center :title="item.name"  v-for="item in vips" :key="item.id" :label="'积分:'+item.积分+'\n'+item.未消费天数+'天未消费'" is-link @click="toVipInfo(item)" />
+      <van-cell center :title="item.name"  v-for="item in vips" :key="item.id" :label="'积分:'+item.积分+'\n'+item.未消费天数+'天未消费'+'\nRFM值 '+item.R+':'+item.F+':'+item.M" is-link @click="toVipInfo(item)" />
     </van-cell-group>
   </div>
 
