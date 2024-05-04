@@ -1,0 +1,26 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://101.42.104.145:3306/hx
+    username: root
+    password: miaoshidahu
+    type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    timeout: 5000
+server:
+  port: 8090
+
+forest:
+  ## ????????/??Forest??/???????? true?
+  log-enabled: false
+  ## ??/??Forest???????? true?
+  log-request: false
+  ## ??/??Forest?????????? true?
+  log-response-status: false
+  ## ??/??Forest?????????? false?
+  log-response-content: false
+  max-connections: 50000        # 连接池最大连接数（默认为 500）
+  max-route-connections: 50000
+  max-request-queue-size: 50000  # [自v1.5.22版本起可用] 最大请求等待队列大小
+  max-async-thread-size: 50000   # [自v1.5.21版本起可用] 最大异步线程数
+  max-async-queue-size: 50000     # [自v1.5.22版本起可用] 最大异步线程池队列大小
