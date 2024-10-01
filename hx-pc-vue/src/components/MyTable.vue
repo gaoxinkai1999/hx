@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1>会员维护系统</h1>
+    <h2>会员维护系统</h2>
 
-    <el-row :gutter="20">
+    <el-row :gutter="24">
       <!--部门数据-->
-      <el-col :span="4" :xs="24">
+      <el-col :span="3" :xs="24">
         <div class="head-container">
           <el-tree
               :data="deptOptions"
@@ -28,7 +28,7 @@
         <el-divider></el-divider>
         <FindVip></FindVip>
       </el-col>
-      <el-col :span="20" :xs="24" v-if="NodeUser==null&&this.deptUserOption.length>0">
+      <el-col :span="16" :xs="24" v-if="NodeUser==null&&this.deptUserOption.length>0">
 
         <el-table
             :data="deptUserOption"
@@ -232,6 +232,7 @@
         <el-table
             :data="vips"
             border
+            style="width: 90%"
         >
           <el-table-column label="序号" width="80">
             <template slot-scope="scope">
@@ -242,35 +243,35 @@
           <el-table-column
               prop="name"
               label="会员名"
-              width="120">
+          >
           </el-table-column>
           <el-table-column
               prop="phone"
-              width="120"
+
               label="手机号">
           </el-table-column>
           <el-table-column
               prop="age"
               label="年龄"
-              width="120">
+          >
           </el-table-column>
           <el-table-column
               sortable
               prop="积分"
-              width="120"
+
               label="积分">
           </el-table-column>
 
           <el-table-column
               sortable
               prop="未消费天数"
-              width="120"
+
               label="未消费天数">
           </el-table-column>
           <el-table-column
               sortable
               prop="R"
-              width="120"
+
               label="R"
               :filters="[{text: 5, value: 5}, {text: 4, value: 4}, {text: 3, value: 3}, {text: 2, value: 2}, {text: 1, value: 1}]"
               :filter-method="filterHandler"
@@ -279,7 +280,7 @@
           <el-table-column
               sortable
               prop="F"
-              width="120"
+
               label="F"
               :filters="[{text: 5, value: 5}, {text: 4, value: 4}, {text: 3, value: 3}, {text: 2, value: 2}, {text: 1, value: 1}]"
               :filter-method="filterHandler">
@@ -287,7 +288,7 @@
           <el-table-column
               sortable
               prop="M"
-              width="120"
+
               label="M"
               :filters="[{text: 5, value: 5}, {text: 4, value: 4}, {text: 3, value: 3}, {text: 2, value: 2}, {text: 1, value: 1}]"
               :filter-method="filterHandler">
@@ -295,18 +296,18 @@
           <el-table-column
               sortable
               prop="adress"
-              width="120"
+
               label="地址">
           </el-table-column>
           <el-table-column
               sortable
               prop="create_time"
-              width="120"
+
               label="创建时间">
           </el-table-column>
           <el-table-column
               label="操作"
-              >
+          >
             <template slot-scope="scope">
               <el-button
                   @click.native.prevent="OpenSetVip(scope.row)"
@@ -570,14 +571,14 @@ export default {
       }
 
     },
-     get念念不忘() {
-       this.$http.post('念念不忘', {UserId: this.NodeUser.id}).then(res => {
-         this.vips = res.data
-       }  )
+    get念念不忘() {
+      this.$http.post('念念不忘', {UserId: this.NodeUser.id}).then(res => {
+        this.vips = res.data
+      })
 
     },
-     get好久不见() {
-   this.$http.post('好久不见', {UserId: this.NodeUser.id}).then(res => {
+    get好久不见() {
+      this.$http.post('好久不见', {UserId: this.NodeUser.id}).then(res => {
         this.vips = res.data
       })
     },
@@ -633,10 +634,10 @@ export default {
     nodeDrop(draggingNode, dropNode) {
       var user = draggingNode.data;
       var dept = dropNode.data;
-      this.$http.post('MoveUser',{DeptId:dept.id,UserId:user.id}).then(res=>{
+      this.$http.post('MoveUser', {DeptId: dept.id, UserId: user.id}).then(res => {
         console.log(res.data)
         this.$message({
-          message: '已成功将  ['+user.name+']  转移到  ['+dept.name+']',
+          message: '已成功将  [' + user.name + ']  转移到  [' + dept.name + ']',
           type: 'success'
         });
       })

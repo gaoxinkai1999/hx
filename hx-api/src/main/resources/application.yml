@@ -5,8 +5,6 @@ spring:
     username: root
     password: miaoshidahu
     type: com.alibaba.druid.pool.DruidDataSource
-  redis:
-    timeout: 5000
 server:
   port: 8090
 
@@ -24,3 +22,4 @@ forest:
   max-request-queue-size: 50000  # [自v1.5.22版本起可用] 最大请求等待队列大小
   max-async-thread-size: 50000   # [自v1.5.21版本起可用] 最大异步线程数
   max-async-queue-size: 50000     # [自v1.5.22版本起可用] 最大异步线程池队列大小
+  timeout: 30000                 # 请求超时时间，单位为毫秒（默认为 30000）
