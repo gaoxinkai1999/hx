@@ -110,5 +110,97 @@ public class 用户列表请求参数 implements 请求参数{
                 "}";
     }
 
+    public void demo(int pageid){
+        ProcArray="{\n" +
+                "\t\"INFO\":[\n" +
+                "\t\t{\n" +
+                "\t\t\t\"FIELD\":\"queryType\",\n" +
+                "\t\t\t\"VALUE\":\"all\",\n" +
+                "\t\t\t\"TYPE\":1\n" +
+                "\t\t},\n" +
+                "\t\t{\n" +
+                "\t\t\t\"FIELD\":\"orderType\",\n" +
+                "\t\t\t\"VALUE\":\"totalmoney\",\n" +
+                "\t\t\t\"TYPE\":1\n" +
+                "\t\t},\n" +
+                "\t\t{\n" +
+                "\t\t\t\"FIELD\":\"pageid\",\n" +
+                "\t\t\t\"VALUE\":3,\n" +
+                "\t\t\t\"TYPE\":0\n" +
+                "\t\t},\n" +
+                "\t\t{\n" +
+                "\t\t\t\"FIELD\":\"bsid\",\n" +
+                "\t\t\t\"VALUE\":255982,\n" +
+                "\t\t\t\"TYPE\":0\n" +
+                "\t\t},\n" +
+                "\t\t{\n" +
+                "\t\t\t\"FIELD\":\"filterJson\",\n" +
+                "\t\t\t\"VALUE\":\"{\n" +
+                "\t\t\t\t\\\"accumulateBe\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"accumulateEnd\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"opCardBeDate\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"opCardEndDate\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"ageBe\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"ageEnd\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"area\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"birthBeDate\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"birthEndDate\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"bottomsSize\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"cardRestBe\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"cardResEnd\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"color\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"consumeBeDate\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"consumeEndDate\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"saleBe\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"saleEnd\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"consumeTimesBe\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"consumeTimesEnd\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"curIntegralBe\\\":\\\"5000\\\",\n" +
+                "\t\t\t\t\\\"curIntegralEnd\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"customerTag\\\":\\\"郜小敏\\/殷艳霞\\/王青花\\/何丽美\\/史燕花\\\",\n" +
+                "\t\t\t\t\\\"dvalue\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"fvalue\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"guideName\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"haswechat\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"height\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"isAddCorpwx\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"isBindOnline\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"isWxFollow\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"ivalue\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"job\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"keyword\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"memoryBeDate\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"memoryEndDate\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"mvalue\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"noConsumeDaysBe\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"noConsumeDaysEnd\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"norevisitBeDate\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"norevisitEndDate\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"opCardGuide\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"referHyid\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"revisitBeDate\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"revisitEndDate\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"revisitTheme\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"revisitType\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"rvalue\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"shoesSize\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"shopid\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"size\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"skin\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"tix\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"topsSize\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"allIntegralBe\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"allIntegralEnd\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"trousersLength\\\":\\\"\\\",\n" +
+                "\t\t\t\t\\\"cardType\\\":\\\"\\\"\n" +
+                "\t\t\t}\",\n" +
+                "\t\t\t\"TYPE\":1\n" +
+                "\t\t}\n" +
+                "\t]\n" +
+                "}";
+    }
+
+
+
 
 }

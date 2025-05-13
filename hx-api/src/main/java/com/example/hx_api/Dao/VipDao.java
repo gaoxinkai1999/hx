@@ -149,4 +149,11 @@ public interface VipDao {
 
     })
     ArrayList<JSONObject> demo(int id);
+
+    /**
+     * 获取指定部门的会员列表
+     */
+
+    @Select("select * from vip right join user on  vip.维护人id=user.id  where 所属部门id=3")
+    ArrayList<Vip> getVipsByDept();
 }

@@ -10,6 +10,7 @@ import com.example.hx_api.Dao.VipDao;
 import com.example.hx_api.Demo.Spider;
 import com.example.hx_api.Demo.Vip_;
 import com.example.hx_api.Demo.Vip_Dao;
+import com.example.hx_api.PoJo.Vip;
 import com.example.hx_api.Service.UpDate;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.BeanFactory;
@@ -72,15 +73,17 @@ class ShoubaApplicationTests {
         用户列表请求参数 a = new 用户列表请求参数();
 
 
-        for (int i = 1; i < 24; i++) {
+        for (int i = 0; i < 3; i++) {
 
-            a.all(i);
+            a.demo(i);
             响应 用户列表 = api.用户列表(a);
+            System.out.println(用户列表);
 //            获取id和名字
             for (Object o : 用户列表.getMESSAGE()) {
                 JSONObject messageObject = (JSONObject) o;
                 int hyid= messageObject.getIntValue("HYID");
                 String name=messageObject.getString("C_NAME");
+                int 当前积分 = messageObject.getIntValue("n_value");
                 //            获取rfm值
                 JSONObject demo1 = api.demo(new RFM参数(hyid));
                 JSONObject message = demo1.getJSONArray("MESSAGE").getJSONObject(0);
@@ -88,8 +91,9 @@ class ShoubaApplicationTests {
                 int F=message.getIntValue("fvalue");
                 int M=message.getIntValue("mvalue");
                 String phone = message.getString("C_MOBILE");
-                Vip_ vip = new Vip_(hyid, name, R, F, M, phone);
-                vip_dao.add(vip);
+                System.out.println(name+'\t'+phone+'\t'+当前积分+'\t'+R+'\t'+F+'\t'+M);
+                //Vip_ vip = new Vip_(hyid, name, R, F, M, phone);
+                //vip_dao.add(vip);
             }
 
         }
@@ -97,4 +101,28 @@ class ShoubaApplicationTests {
 
 
     }
+    @Test
+    void a()  {
+        ArrayList<Vip> vipsByDept = vipDao.getVipsByDept();
+
+        for (Vip vip : vipsByDept) {
+
+            JSONObject demo1 = api.demo(new 当前积分(vip.hyid));
+            JSONArray jsonArray = demo1.getJSONObject("MESSAGE").getJSONArray("VIPINFO");
+            int 当前积分=0;
+            for (Object o : jsonArray) {
+                JSONObject messageObject = (JSONObject) o;
+                if (messageObject.getString("NAME").equals("当前积分")){
+                    当前积分=messageObject.getIntValue("VALUE");
+                }
+            }
+            if (当前积分>=5000){
+                System.out.println(vip.name+'\t'+vip.phone+'\t'+当前积分+'\t'+vip.R+'\t'+vip.F+'\t'+vip.M);
+            }
+
+        }
+
+
+    }
+
 }
