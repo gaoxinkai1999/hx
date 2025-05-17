@@ -4,7 +4,7 @@
       <h3 class="title">和信后台管理系统</h3>
       <el-form-item prop="username">
         <el-input
-            v-model="loginForm.username"
+            v-model="loginForm.name"
             type="text"
             auto-complete="off"
             placeholder="账号"
@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import { userApi } from '../services/api';
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Login',
@@ -52,7 +54,7 @@ export default {
   data(){
     return{
       loginForm:{
-        username:'admin',
+        name:'admin',
         password:'admin',
         // rememberMe:false
       },
@@ -61,19 +63,40 @@ export default {
   },
   methods:{
     handleLogin(){
-      if (this.loginForm.username=='admin'&&this.loginForm.password=='admin'){
+      this.loading = true;
+      
+      // 使用mock数据进行本地验证（开发阶段）
+      if (this.loginForm.name=='admin'&&this.loginForm.password=='admin'){
         //设置Vuex登录标志为true，默认userLogin为false
         this.$store.dispatch("userLogin", true);
         //Vuex在用户刷新的时候userLogin会回到默认值false，所以我们需要用到HTML5储存
         //我们设置一个名为Flag，值为isLogin的字段，作用是如果Flag有值且为isLogin的时候，证明用户已经登录了。
         localStorage.setItem("Flag", "isLogin");
-        //iViewUi的友好提示
         //登录成功后跳转到指定页面
         this.$router.push("/index");
+        this.loading = false;
+        return;
       }
-
-
-
+      
+      // 使用API服务层进行登录请求
+      userApi.login(this.loginForm).then(data => {
+        if (!data) {
+          this.$message.error('密码错误或账号不存在');
+        } else {
+          //设置Vuex登录标志为true，默认userLogin为false
+          this.$store.dispatch("userLogin", true);
+          //保存登录状态和用户ID
+          localStorage.setItem("Flag", "isLogin");
+          localStorage.setItem("UserId", data.id);
+          //登录成功后跳转到指定页面
+          this.$router.push("/index");
+        }
+      }).catch(error => {
+        console.error('登录失败:', error);
+        this.$message.error('登录失败，请检查网络连接');
+      }).finally(() => {
+        this.loading = false;
+      });
     }
   }
 }

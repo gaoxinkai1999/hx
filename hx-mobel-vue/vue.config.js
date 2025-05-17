@@ -13,5 +13,15 @@ module.exports = defineConfig({
     },
     historyApiFallback: true,
     allowedHosts: 'all',
+    // 配置代理，解决跨域问题
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:8090', // 后端服务地址
+        changeOrigin: true, // 开启代理
+        pathRewrite: {
+          '^/api': '/api' // 不重写路径
+        }
+      }
+    }
   }
 })

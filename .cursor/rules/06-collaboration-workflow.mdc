@@ -1,0 +1,34 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 协作流程
+
+## API 集成流程
+
+1. 后端开发者在 `hx-api` 项目中实现 RESTful API
+2. 前端开发者在相应的前端项目 (`hx-pc-vue` 或 `hx-mobel-vue`) 中创建对应的 API 服务
+3. 通过 Axios 调用后端 API
+
+## 开发流程建议
+
+1. 功能开发从后端 API 设计开始
+2. 前后端并行开发，使用接口约定
+3. 前端可以使用 Mock 数据进行开发
+4. 集成测试验证 API 交互
+
+## 版本控制
+
+建议使用 Git 分支策略：
+- main/master: 稳定生产版本
+- develop: 开发版本
+- feature/*: 新功能开发
+- bugfix/*: 错误修复
+
+## 部署流程
+
+1. 后端：构建 JAR 文件并部署到服务器
+2. PC 前端：构建静态文件并部署到 Web 服务器
+3. 移动端：构建静态文件部署到 Web 服务器或打包为移动应用
+

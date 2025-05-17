@@ -51,6 +51,7 @@
 
 <script>
 import {Dialog, Toast} from "vant";
+import { userApi, deptApi } from '../services/api';
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
@@ -76,33 +77,37 @@ export default {
         title: '确认注册?',
       })
           .then(() => {
-            // on confirm
-            this.$http.post('addUser',this.data).then(res=>{
-              if (res.data==true){
+            // 使用API服务层进行用户注册
+            userApi.addUser(this.data).then(result => {
+              if (result === true) {
                 Toast.success('注册成功,请返回登录页面');
-
-              }else {
+              } else {
                 Toast.fail('该用户名已使用');
               }
-
-            })
+            }).catch(error => {
+              console.error('注册失败:', error);
+              Toast.fail('注册失败，请检查网络连接');
+            });
           })
           .catch(() => {
             // on cancel
           });
-
     },
     getDepts(){
-      this.$http.post('getDepts').then(res=>{
-        this.depts=res.data
-      })
+      // 使用API服务层获取部门列表
+      deptApi.getAllDepts().then(data => {
+        this.depts = data;
+      }).catch(error => {
+        console.error('获取部门列表失败:', error);
+        Toast.fail('获取部门列表失败');
+      });
     },
     onConfirm(value) {
-      this.data.所属部门=value
+      this.data.所属部门 = value;
       this.showPicker = false;
     },
     onClickLeft(){
-      this.$router.back()
+      this.$router.back();
     }
   }
 }

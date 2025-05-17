@@ -1,0 +1,27 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# PC 端前端结构 (hx-pc-vue)
+
+PC 端前端使用 Vue.js 框架开发，基于 Element UI 组件库构建用户界面。
+
+## 核心目录结构
+
+- [main.js](mdc:hx-pc-vue/src/main.js) - 应用入口文件，初始化 Vue 实例
+- [App.vue](mdc:hx-pc-vue/src/App.vue) - 根组件
+- `src/components` - Vue 组件
+- `src/assets` - 静态资源（图片、样式等）
+- `src/services` - API 服务和接口调用
+- `route` - 路由配置
+- `vuex` - 状态管理
+
+## 技术特点
+
+- 使用 Vue 2.x 版本
+- Element UI 作为 UI 组件库
+- Axios 处理 HTTP 请求
+- Vuex 进行状态管理
+- Vue Router 处理路由
+

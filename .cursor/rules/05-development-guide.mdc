@@ -1,0 +1,49 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 开发指南
+
+## 后端开发 (hx-api)
+
+### 开发环境
+- JDK 1.8
+- Maven
+- Spring Boot 2.7.9
+- MySQL 数据库
+
+### 启动后端
+1. 配置 MySQL 数据库连接
+2. 运行 ShoubaApplication 主类
+
+## PC 端前端开发 (hx-pc-vue)
+
+### 开发环境
+- Node.js
+- npm 或 yarn
+
+### 常用命令
+- 安装依赖: `npm install`
+- 开发模式运行: `npm run serve`
+- 构建生产版本: `npm run build`
+- 代码检查: `npm run lint`
+
+## 移动端前端开发 (hx-mobel-vue)
+
+### 开发环境
+- Node.js
+- npm 或 yarn
+
+### 常用命令
+- 安装依赖: `npm install`
+- 开发模式运行: `npm run serve`
+- 构建生产版本: `npm run build`
+- 代码检查: `npm run lint`
+
+## 代码规范
+
+- 后端遵循 Java 编码规范
+- 前端遵循 Vue.js 推荐的编码规范
+- 使用 ESLint 进行代码风格检查
+

@@ -1,25 +1,68 @@
 spring:
+  profiles:
+    active: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://101.42.104.145:3306/hx
+    url: jdbc:mysql://101.42.104.145:3306/hx?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: miaoshidahu
     type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      # 初始化大小，最小，最大
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      # 连接等待超时时间
+      max-wait: 60000
+      # 配置检测间隔时间，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+      # 配置连接在池中最小生存的时间
+      min-evictable-idle-time-millis: 300000
+      # 用来检测连接是否有效的sql
+      validation-query: SELECT 1 FROM DUAL
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      # 打开PSCache，指定每个连接PSCache的大小
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      # 监控统计拦截的filters
+      filters: stat,wall,log4j2
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并多个DruidDataSource的监控数据
+      use-global-data-source-stat: true
+      # 配置web监控
+      web-stat-filter:
+        enabled: true
+      stat-view-servlet:
+        enabled: true
+        login-username: admin
+        login-password: admin
+  
+
 server:
   port: 8090
 
 forest:
-  ## ????????/??Forest??/???????? true?
+  # 启用Forest日志
   log-enabled: false
-  ## ??/??Forest???????? true?
-  log-request: false
-  ## ??/??Forest?????????? true?
-  log-response-status: false
-  ## ??/??Forest?????????? false?
-  log-response-content: false
-  max-connections: 50000        # 连接池最大连接数（默认为 500）
-  max-route-connections: 50000
-  max-request-queue-size: 50000  # [自v1.5.22版本起可用] 最大请求等待队列大小
-  max-async-thread-size: 50000   # [自v1.5.21版本起可用] 最大异步线程数
-  max-async-queue-size: 50000     # [自v1.5.22版本起可用] 最大异步线程池队列大小
-  timeout: 30000                 # 请求超时时间，单位为毫秒（默认为 30000）
+  # 日志配置在各环境配置中单独设置
+  # 连接池配置调整为合理值
+  max-connections: 200
+  max-route-connections: 100
+  max-request-queue-size: 100
+  max-async-thread-size: 50
+  max-async-queue-size: 100
+  timeout: 30000
+
+# 应用自定义配置
+hx:
+  api:
+    baseUrl: http://101.43.69.26:9129
+    token-id: 443842AC-E352-4AD0-B454-9671585E16EB
+    db-name: xerp_qxhexingxc
+    business-id: 255982
+
+# 单独为 Forest 定义 baseUrl (与 application-dev.yml 保持一致)
+hxApiBaseUrl: http://101.43.69.26:9129

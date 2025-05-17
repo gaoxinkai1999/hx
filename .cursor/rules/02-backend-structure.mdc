@@ -1,0 +1,30 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 后端结构 (hx-api)
+
+后端使用 Spring Boot 框架开发，采用经典的 MVC 架构设计模式。
+
+## 核心目录结构
+
+- [ShoubaApplication.java](mdc:hx-api/src/main/java/com/example/hx_api/ShoubaApplication.java) - 应用程序主入口
+- `com.example.hx_api.controller` - 控制器层，处理 HTTP 请求
+- `com.example.hx_api.service` - 服务层，实现业务逻辑
+- `com.example.hx_api.mapper` - 数据访问层，与数据库交互
+- `com.example.hx_api.model` - 数据模型/实体类
+- `com.example.hx_api.config` - 配置类
+- `com.example.hx_api.common` - 通用工具和辅助类
+- `com.example.hx_api.constant` - 常量定义
+- `com.example.hx_api.client` - 外部服务客户端
+- `com.example.hx_api.task` - 定时任务
+
+## 数据库配置
+
+项目使用 MySQL 数据库，通过 MyBatis ORM 框架进行数据库操作，并使用 Druid 作为连接池管理工具。
+
+## API 设计
+
+RESTful API 设计风格，返回 JSON 格式数据。
+

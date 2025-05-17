@@ -31,6 +31,7 @@
 <script>
 /* eslint-disable vue/multi-word-component-names */
 import Mine from "@/components/Mine.vue";
+import { vipApi } from '@/services/api.js'; // 导入新的api服务
 
 export default {
   name: "Index",
@@ -55,16 +56,28 @@ export default {
         }
       })
     },
-    getNum(){
-      this.$http.post('念念不忘数量',{UserId:localStorage.getItem('UserId')}).then(res=>{
-        this.念念不忘数量=res.data
-      })
-      this.$http.post('好久不见数量',{UserId:localStorage.getItem('UserId')}).then(res=>{
-        this.好久不见数量=res.data
-      })
-      this.$http.post('欢聚一堂数量').then(res=>{
-        this.欢聚一堂数量=res.data
-      })
+    async getNum(){ // 标记为 async
+      const userId = localStorage.getItem('UserId');
+      if (!userId) {
+        console.error("UserId not found in localStorage");
+        // 可以选择性地显示错误提示给用户
+        // Toast.fail("无法获取用户信息，请重新登录");
+        return;
+      }
+      try {
+        const neverForgetCount = await vipApi.getNeverForgetVipsCount(userId);
+        this.念念不忘数量 = neverForgetCount;
+
+        const longTimeNoSeeCount = await vipApi.getLongTimeNoSeeVipsCount(userId);
+        this.好久不见数量 = longTimeNoSeeCount;
+
+        const allVipsCount = await vipApi.getAllVipsCount();
+        this.欢聚一堂数量 = allVipsCount;
+
+      } catch (error) {
+        console.error("获取数量统计失败:", error);
+        // Toast.fail("获取统计数据失败");
+      }
     },
     onClickRight() {
       this.$router.push('/addvip')

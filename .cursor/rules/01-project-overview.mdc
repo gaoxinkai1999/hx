@@ -1,0 +1,38 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# 项目概述
+
+这是一个名为"hx"的全栈项目，由三个主要部分组成：
+
+1. [hx-api](mdc:hx-api/pom.xml) - 使用 Spring Boot 开发的后端 API 服务
+2. [hx-pc-vue](mdc:hx-pc-vue/package.json) - 使用 Vue.js 开发的 PC 端前端应用
+3. [hx-mobel-vue](mdc:hx-mobel-vue/package.json) - 使用 Vue.js 开发的移动端前端应用
+
+## 项目技术栈
+
+### 后端 (hx-api)
+- Spring Boot 2.7.9
+- MyBatis
+- MySQL
+- Lombok
+- Druid 数据库连接池
+- Forest HTTP 客户端
+- PageHelper 分页插件
+
+### 前端 PC (hx-pc-vue)
+- Vue.js 2.6
+- Element UI
+- Axios
+- Vuex
+- Vue Router
+
+### 前端移动端 (hx-mobel-vue)
+- Vue.js 2.6
+- Vant UI
+- Axios
+- Vuex
+- Vue Router
+

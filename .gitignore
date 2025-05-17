@@ -18,3 +18,5 @@ node_modules/
 /hx-api/.mvn/
 /hx-mobel-vue/dist/
 /hx-pc-vue/dist/
+idea/
+.vscode/

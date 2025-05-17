@@ -27,7 +27,7 @@
             width="180">
         </el-table-column>
         <el-table-column
-            prop="维护人.name"
+            prop="maintainer.name"
             label="维护人">
         </el-table-column>
       </el-table>
@@ -40,28 +40,30 @@
 </template>
 
 <script>
+import { vipApi } from '../services/api';
+
 export default {
   name: "FindVip",
   data() {
     return {
-      dialogVisible:false,
+      dialogVisible: false,
       restaurants: [],
       name: '',
-      result:[]
+      result: []
     }
   },
   methods: {
     querySearchAsync(queryString, cb) {
-      this.$http.post('FindVipLikeName',{name:this.name}).then(res=>{
-        this.restaurants=res.data
+      vipApi.findVipsByNameLike(this.name).then(data => {
+        this.restaurants = data
         cb(this.restaurants);
       })
     },
-    getVipsByName(){
-      this.$http.post('getVipsByName',{name:this.name}).then(res=>{
-        console.log(res.data)
-        this.result=res.data
-        this.dialogVisible=true
+    getVipsByName() {
+      vipApi.getVipsByName(this.name).then(data => {
+        console.log(data)
+        this.result = data
+        this.dialogVisible = true
       })
     }
   },

@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:mysql://101.42.104.145:3306/hx?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: miaoshidahu
+
+logging:
+  level:
+    com.example.hx_api: debug
+    org.springframework: info
+
+# 开发环境下启用Forest日志
+forest:
+  log-request: true
+  log-response-status: true
+  log-response-content: true
+
+# 开发环境下API配置
+hx:
+  api:
+    baseUrl: http://101.43.69.26:9129
+
+# 单独为 Forest 定义 baseUrl
+hxApiBaseUrl: http://101.43.69.26:9129
